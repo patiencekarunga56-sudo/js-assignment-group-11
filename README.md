@@ -11,3 +11,4 @@ Nassolo Diana
 Alinaitwe Arnold
 .Nabukenya Ronita
 .Nampijja Leocardia
+ The website allows users to select products  and add them to the cart view them and get billed then  get delivered to there adddresses
