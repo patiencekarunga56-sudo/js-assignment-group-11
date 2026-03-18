@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PearlShop - Home</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav>
+    <h1>PearlShop</h1>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="checkout.html">Checkout</a>
+    </div>
+  </nav>
+  <div class="main">
+    <h2>Welcome to PearlShop</h2>
+    <p>Find great deals on Electronics, Fashion, Books and more!</p>
+  </div>
+  <div class="search-area">
+    <input type="text" id="search-input" placeholder="Search for a product..." />
+  </div>
+  <div class="filter-area">
+    <button class="filter-btn" id="btn-all">All</button>
+    <button class="filter-btn" id="btn-electronics">Electronics</button>
+    <button class="filter-btn" id="btn-fashion">Fashion</button>
+    <button class="filter-btn" id="btn-books">Books</button>
+    <button class="filter-btn" id="btn-home">Home</button>
+  </div>
+  <div id="product-grid">
+  </div>
+  <p id="no-results" style="display:none; text-align:center; color:gray; margin:30px;">
+    No products found.
+  </p>
+  <footer>
+ <p>PearlShop &copy; 2026 group 11</p>
+  </footer>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
