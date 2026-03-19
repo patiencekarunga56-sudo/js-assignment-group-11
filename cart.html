@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PearlShop - Cart</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav>
+    <h1>PearlShop</h1>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="checkout.html">Checkout</a>
+    </div>
+  </nav>
+  <div class="page-title">
+    <h2>Your Cart</h2>
+  </div>
+  <div id="cart-list"></div>
+
+  <div id="empty-message" style="display:none; text-align:center; margin:40px;">
+    <p>Your cart is empty.</p>
+    <a href="index.html" class="back-btn">Go Shopping</a>
+  </div>
+
+  <!-- total button -->
+  <div id="cart-summary" style="display:none;">
+    <p>Total Items: <strong id="total-items">0</strong></p>
+    <p>Total Price: <strong id="total-price">UGX 0</strong></p>
+    <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+  </div>
+  <footer>
+    <p>PearlShop &copy; 2026 group 11</p>
+  </footer>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
