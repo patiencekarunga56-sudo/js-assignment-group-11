@@ -3,16 +3,16 @@ const products = [
   { id: 2, name: "HP Laptop",        price: 2200000, category: "Electronics", image: "Images/laptop.jpg" },
   { id: 3, name: "Wireless Earbuds", price: 120000,  category: "Electronics", image: "Images/headphones.jpg" },
   { id: 4, name: "Men's Sneakers",   price: 95000,   category: "Fashion",     image: "Images/sneakers.webp" },
-  { id: 5, name: "Ladies Dress",     price: 75000,   category: "Fashion",     image: "Images/dress.webp" },
-  { id: 6, name: "Leather Handbag",  price: 130000,  category: "Fashion",     image: "Images/hand bag.webp" },
+  { id: 5, name: "Ladies Dresses",     price: 75000,   category: "Fashion",     image: "Images/dress.webp" },
+  { id: 6, name: "Leather Handbags",  price: 130000,  category: "Fashion",     image: "Images/hand bag.webp" },
   { id: 7, name: "JS for Beginners", price: 45000,   category: "Books",       image: "Images/js book.webp" },
-  { id: 8, name: "Business Book",    price: 38000,   category: "Books",       image: "Images/book.webp" },
-  { id: 9, name: "Electric Kettle",  price: 65000,   category: "Home",        image: "Images/kettle.jpg" },
-  { id: 10, name: "Wall Clock",      price: 42000,   category: "Home",        image: "Images/clock.jpg" }
+  { id: 8, name: "Business Books",    price: 38000,   category: "Books",       image: "Images/book.webp" },
+  { id: 9, name: "Electric Kettles",  price: 65000,   category: "Home",        image: "Images/kettle.jpg" },
+  { id: 10, name: "Wall Clocks",      price: 42000,   category: "Home",        image: "Images/clock.jpg" }
 ];
 let selectedCategory = "All";
 
-//function to Read the cart from localStorage
+//function to Read(get) the cart data from localStorage
 function getCart() {
   try {
     let saved = localStorage.getItem("cart");
@@ -34,6 +34,7 @@ function saveCart(cart) {
     console.log("Error saving cart: " + error);
   }
 }
+//calculate the total number of items in the shoping cart 
 function getCartCount() {
   let cart = getCart();
   let total = 0;
