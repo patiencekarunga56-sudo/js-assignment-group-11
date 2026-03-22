@@ -1,3 +1,5 @@
+
+// An array of items to be displayed on the home page
 const products = [
   { id: 1, name: "Samsung Phone",    price: 850000,  category: "Electronics", image:"Images/phones.jpg" },
   { id: 2, name: "HP Laptop",        price: 2200000, category: "Electronics", image: "Images/laptop.jpg" },
@@ -26,7 +28,7 @@ function getCart() {
   }
 }
 
-//a function to Save the cart to localStorage
+//a function to Save the items to the cart to localStorage
 function saveCart(cart) {
   try {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -34,7 +36,7 @@ function saveCart(cart) {
     console.log("Error saving cart: " + error);
   }
 }
-//calculate the total number of items in the shoping cart 
+//calculate the total number of items in the shopping cart 
 function getCartCount() {
   let cart = getCart();
   let total = 0;
@@ -49,14 +51,14 @@ function formatPrice(amount) {
   return "UGX " + amount.toLocaleString();
 }
 
-//a function to updates the number shown next to "Cart" in the navbar
+//a function to updates the number shown next to "Cart" in the navbar 
 function updateCartBadge() {
   let badge = document.getElementById("cart-count");
   if (badge !== null) {
     badge.textContent = getCartCount();
   }
 }
-//Show Product Cards
+//Show Product Cards that have been specified in the array
 function showProducts(list) {
   let grid = document.getElementById("product-grid");
   let noResults = document.getElementById("no-results");
@@ -70,23 +72,24 @@ function showProducts(list) {
     let card = document.createElement("div");
     card.className = "product-card";
 
-  
+  //card.html adds the cards onto the page showing the image,name,catergory and prices
     card.innerHTML =
   "<div class='product-image'><img src='" + product.image + "' alt='" + product.name + "' /></div>" +
   "<span class='product-cat'>" + product.category + "</span>" +
   "<h3>" + product.name + "</h3>" +
   "<p class='product-price'>" + formatPrice(product.price) + "</p>" +
   "<button class='add-btn' data-id='" + product.id + "'>Add to Cart</button>";
-
+//places the cards on the page
     grid.appendChild(card);
   }
+  
   let buttons = document.querySelectorAll(".add-btn");
   for (let b = 0; b < buttons.length; b++) {
-    buttons[b].addEventListener("click", function() {
+    buttons[b].addEventListener("click", function() {// the .addEventListener ensures that in an event that the button is clicked that specific item is added to the cart
       let productId = parseInt(this.getAttribute("data-id"));
       addToCart(productId);
 
-      //this is used to Change button text briefly to confirm
+      //this is used to Change button text briefly to confirm that an item has been added
       this.textContent = "Added!";
       let btn = this;
       setTimeout(function() {
@@ -108,7 +111,7 @@ function addToCart(productId) {
     if (product === null) return;
     let cart = getCart();
 
-    //this code Checks if this product is already in the cart
+    //this code Checks if this product is already in the cart and increases by one if the the item is clicked again
     let found = false;
     for (let j = 0; j < cart.length; j++) {
       if (cart[j].id === productId) {
@@ -116,7 +119,6 @@ function addToCart(productId) {
         found = true;
       }
     }
-
     //this adds an item to cart if not found, add it as a new item
     if (found === false) {
       cart.push({
@@ -134,11 +136,12 @@ function addToCart(productId) {
     alert("Something went wrong adding to cart: " + error);
   }
 }
-//a function to filter items
+//a function to filter items in the search bar using the product Id
 function searchProducts() {
   let searchBox = document.getElementById("search-input");
   if (searchBox === null) return;
-  let query = searchBox.value.toLowerCase();
+  let query = searchBox.value.toLowerCase();//changes all input into lowercase
+  
   //this code is to Filter products that match the search AND selected category
   let results = [];
   for (let i = 0; i < products.length; i++) {
@@ -155,7 +158,7 @@ function searchProducts() {
 function filterByCategory(category) {
   selectedCategory = category;
 
-  //this removes "active" class from all buttons, add it to the clicked one
+  //this removes "active" class from all buttons,and adds it to the clicked one
   let buttons = document.querySelectorAll(".filter-btn");
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].className = "filter-btn";
@@ -169,7 +172,7 @@ function filterByCategory(category) {
   searchProducts();
 }
 
-
+//this function is to show the items selected in the cart on the cart page
 function showCart() {
   let cartList    = document.getElementById("cart-list");
   let emptyMsg    = document.getElementById("empty-message");
@@ -179,12 +182,11 @@ function showCart() {
   let cart = getCart();
 
   cartList.innerHTML = "";
-// If cart is empty
+// If the cart is empty
   if (cart.length === 0) {
     emptyMsg.style.display    = "block";
     cartSummary.style.display = "none";
-    retu
-  rn;
+    return;
   }
 
   // Cart has items show summary
@@ -196,6 +198,7 @@ function showCart() {
     row.className = "cart-item";
 
     //the innerHTML fills the row with the item details
+    //all the items on the cart page are displayed in rows showing the image,name,price and lastly quantity
     row.innerHTML =
       "<div class='cart-item-left'>" +
         "<div class='cart-item-image'>" + item.image + "</div>" +
@@ -210,8 +213,9 @@ function showCart() {
         "<button class='qty-btn' data-id='" + item.id + "' data-action='increase'>+</button>" +
       "</div>" +
       "<button class='remove-btn' data-id='" + item.id + "'>Remove</button>";
-    cartList.appendChild(row);
+    cartList.appendChild(row);//shows the items on the html page
   }
+  //attaching click listeners to all the + / - quantity buttons and all the Remove buttons, then updates the total price at the bottom.
   let qtyBtns = document.querySelectorAll(".qty-btn");
   for (let q = 0; q < qtyBtns.length; q++) {
     qtyBtns[q].addEventListener("click", function() {
@@ -230,7 +234,7 @@ function showCart() {
   updateTotals(cart);
 }
 
-//a function to change quantity
+//a function to change quantity of an item in the cart
 function changeQuantity(productId, action) {
   try {
     let cart = getCart();
@@ -262,7 +266,7 @@ function removeFromCart(productId) {
   try {
     let cart = getCart();
     let newCart = [];
-    //this keeps every item except the one being removed
+    //this keeps every item except the one being removed from the cart
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].id !== productId) {
         newCart.push(cart[i]);
@@ -343,11 +347,12 @@ function setupCheckoutForm() {
       if (phone.length !== 10 || isNaN(phone)) {
         throw new Error("Phone number must be exactly 10 digits.");
       }
- //this is to Calculate grand total
+ //this is to Calculate grand total of all the items in the cart
     let total = 0;
       for (let i = 0; i < cart.length; i++) {
         total = total + (cart[i].price * cart[i].quantity);
       }
+      //when the order is successfully processed then dispay this message
       successMsg.innerHTML =
         "Order placed successfully! Thank you, " + name + ".<br>" +
         "Total: " + formatPrice(total) + "<br>" +
@@ -377,13 +382,13 @@ function setupHomePage() {
   searchInput.addEventListener("input", function() {
     searchProducts();
   });
-  // Filter buttons  each button calls filterByCategory with its name
+  // Filter buttons  each button calls filterByCategory with its name and the items in the category
   document.getElementById("btn-all").addEventListener("click",         function() { filterByCategory("All");         });
   document.getElementById("btn-electronics").addEventListener("click", function() { filterByCategory("Electronics"); });
   document.getElementById("btn-fashion").addEventListener("click",     function() { filterByCategory("Fashion");     });
   document.getElementById("btn-books").addEventListener("click",       function() { filterByCategory("Books");       });
   document.getElementById("btn-home").addEventListener("click",        function() { filterByCategory("Home");        });
-  // Set "All" button as active by default
+  // Set "All" button as active by default till another button is clicked
   document.getElementById("btn-all").className = "filter-btn active";
 }
 //updates cart on every page
