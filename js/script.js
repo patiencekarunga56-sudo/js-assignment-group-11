@@ -363,7 +363,7 @@ function setupCheckoutForm() {
       document.getElementById("phone").value   = "";
       document.getElementById("address").value = "";
     } catch (error) {
-      var errorMsg = document.getElementById("error-msg");
+      let errorMsg = document.getElementById("error-msg");
       errorMsg.textContent   = error.message;
       errorMsg.style.display = "block";
     }
